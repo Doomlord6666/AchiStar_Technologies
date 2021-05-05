@@ -1,0 +1,44 @@
+pipeline{
+        agent {
+            label 'AchiStar_Technologies_Pipeline' 
+        }
+      
+        tools {
+          maven 'mymaven'
+          jdk 'myjava' 
+        }
+      
+        stages {
+            stage ('Checkout the code'){
+                steps{
+                    git branch: 'master', url: 'https://github.com/Doomlord6666/AchiStar_Technologies.git'
+                }
+            }
+
+            stage ('Build the code'){
+                steps{
+                    sh """
+                    echo compile the 
+                    mvn compile
+                    """
+                }
+            }   
+
+            stage ('JUNIT Test'){
+                steps{
+                    sh """
+                    echo compile the code
+                    mvn test
+                    """
+                }
+            }
+
+            stage ('Package the code'){
+                steps{
+                    sh"""
+                    mvn package
+                    """
+                }
+            } 
+        }
+}
