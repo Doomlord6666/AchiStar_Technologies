@@ -1,6 +1,6 @@
 pipeline{
         agent {
-            label 'AchiStar_Technologies_Pipeline' 
+            label 'Master' 
         }
       
         tools {
