@@ -37,7 +37,7 @@ pipeline{
                 steps{
                     sh"""
                     mvn package
-                    docker build -t doomlord6666/achiStar_technologies:${currentBuild.number} .
+                    docker build -t doomlord6666/achiStartechnologies:${currentBuild.number} .
                     """
                 }
             } 
@@ -46,7 +46,7 @@ pipeline{
                 steps{
                     withDockerRegistry([ credentialsId: "dockerhub", url: "" ]) {
                         sh"""
-                        docker push doomlord6666/achiStar_technologies:${currentBuild.number}
+                        docker push doomlord6666/achiStartechnologies:${currentBuild.number}
                         """
                     }
                 }
@@ -55,7 +55,7 @@ pipeline{
             stage ('Run the docker container'){
                 steps{
                     sh"""
-                    docker run -d -p 8080:8080 doomlord6666/achiStar_aechnologies:${currentBuild.number}
+                    docker run -d -p 8080:8080 doomlord6666/achiStaraechnologies:${currentBuild.number}
                     """
                 }
             } 
