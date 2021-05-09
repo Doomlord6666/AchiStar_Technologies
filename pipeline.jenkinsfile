@@ -37,8 +37,28 @@ pipeline{
                 steps{
                     sh"""
                     mvn package
+                    docker build -t doomlord6666/ab:${currentBuild.number} .
                     """
                 }
             } 
+            
+            stage ('Push the Docker Image'){
+                steps{
+                    withDockerRegistry([ credentialsId: "dockerhub", url: "" ]) {
+                        sh"""
+                        docker push doomlord6666/ab:${currentBuild.number}
+                        """
+                    }
+                }
+            } 
+            
+            stage ('Run the docker container'){
+                steps{
+                    sh"""
+                    docker run -d -p 8080:8080 doomlord6666/ab:${currentBuild.number}
+                    """
+                }
+            } 
+            
         }
 }
